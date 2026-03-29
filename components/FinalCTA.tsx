@@ -44,6 +44,24 @@ export default function FinalCTA() {
         const ctx = canvas.getContext('2d');
         if (!ctx) return;
 
+        // --- FIXED: Extract DOM Layout mutations OUT of the scroll loop! ---
+        const resizeCanvas = () => {
+            const dpr = window.devicePixelRatio || 1;
+            const width = window.innerWidth;
+            const height = window.innerHeight;
+
+            canvas.width = width * dpr;
+            canvas.height = height * dpr;
+            canvas.style.width = `${width}px`;
+            canvas.style.height = `${height}px`;
+
+            ctx.scale(dpr, dpr);
+            render(); // Force a re-render after resize clears context
+        };
+
+        window.addEventListener('resize', resizeCanvas);
+        resizeCanvas(); // Set initial size
+
         const render = () => {
             const progress = scrollYProgress.get();
             // Map 0-1 progress to 0-(totalFrames-1)
@@ -58,17 +76,9 @@ export default function FinalCTA() {
             const img = imagesRef.current[frameIndex];
             if (!img || !img.complete) return;
 
-            // High-DPI rendering
-            const dpr = window.devicePixelRatio || 1;
             const width = window.innerWidth;
             const height = window.innerHeight;
-
-            canvas.width = width * dpr;
-            canvas.height = height * dpr;
-            canvas.style.width = `${width}px`;
-            canvas.style.height = `${height}px`;
-
-            ctx.scale(dpr, dpr);
+            
             ctx.clearRect(0, 0, width, height);
 
             // Object-fit: contain logic - centers the image
@@ -93,10 +103,11 @@ export default function FinalCTA() {
         };
 
         const unsubscribe = scrollYProgress.on('change', render);
-        // Initial render attempt (likely won't be ready immediately, but good practice)
-        render();
 
-        return () => unsubscribe();
+        return () => {
+            window.removeEventListener('resize', resizeCanvas);
+            unsubscribe();
+        };
     }, [scrollYProgress]);
 
     return (

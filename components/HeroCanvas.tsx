@@ -44,17 +44,8 @@ export default function HeroCanvas() {
         const ctx = canvas.getContext('2d');
         if (!ctx) return;
 
-        const render = () => {
-            const progress = scrollYProgress.get();
-            const frameIndex = Math.min(
-                Math.floor(progress * TOTAL_FRAMES),
-                TOTAL_FRAMES - 1
-            );
-
-            const img = imagesRef.current[frameIndex];
-            if (!img || !img.complete) return;
-
-            // High-DPI rendering
+        // --- FIXED: Extract DOM Layout mutations OUT of the scroll loop! ---
+        const resizeCanvas = () => {
             const dpr = window.devicePixelRatio || 1;
             const width = window.innerWidth;
             const height = window.innerHeight;
@@ -65,6 +56,26 @@ export default function HeroCanvas() {
             canvas.style.height = `${height}px`;
 
             ctx.scale(dpr, dpr);
+            render(); // Force a re-render after resize clears context
+        };
+
+        window.addEventListener('resize', resizeCanvas);
+        resizeCanvas(); // Set initial size
+
+        // High-performance scroll render function
+        const render = () => {
+            const progress = scrollYProgress.get();
+            const frameIndex = Math.min(
+                Math.floor(progress * TOTAL_FRAMES),
+                TOTAL_FRAMES - 1
+            );
+
+            const img = imagesRef.current[frameIndex];
+            if (!img || !img.complete) return;
+
+            const width = window.innerWidth;
+            const height = window.innerHeight;
+            
             ctx.clearRect(0, 0, width, height);
 
             // Object-fit: contain logic - centers the image and prevents cropping
@@ -89,9 +100,11 @@ export default function HeroCanvas() {
         };
 
         const unsubscribe = scrollYProgress.on('change', render);
-        render(); // Initial render
 
-        return () => unsubscribe();
+        return () => {
+            window.removeEventListener('resize', resizeCanvas);
+            unsubscribe();
+        };
     }, [scrollYProgress]);
 
     return (
