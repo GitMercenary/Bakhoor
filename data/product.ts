@@ -55,20 +55,29 @@ export const productData = {
         {
             id: 'heritage',
             title: 'ROOTED IN HERITAGE',
-            description: 'Authentic Arabian incense experience with the convenience of modern electric technology. No charcoal. No smoke damage. Pure fragrance.',
-            background: '#1A1A1A', // Dark charcoal
+            paragraphs: [
+                'Experience an authentic Arabian incense journey with the unparalleled convenience of modern electric technology. OUD Luxe™ reimagines a centuries-old tradition, bringing the rich, captivating aromas of the Middle East directly into your modern lifestyle without the hassle of traditional methods.',
+                'Say goodbye to the mess of charcoal and the risk of smoke damage. Our state-of-the-art heating element ensures an even, slow burn that releases only the purest fragrance of your favorite bakhoor, preserving its complex notes and therapeutic qualities.'
+            ],
+            background: '#0a0a0c', // Deep midnight
         },
         {
             id: 'design',
             title: 'CRAFTED FOR LUXURY',
-            description: 'Premium aluminum body with gold Arabic calligraphy. Traditional meets modern in every detail. A centerpiece for your home.',
-            background: '#0D0D0D', // Darker shade
+            paragraphs: [
+                'Encased in a premium, aerospace-grade aluminum body, every OUD Luxe™ device is a masterpiece of design. The sleek, minimalist silhouette is elevated by intricate gold Arabic calligraphy, creating a striking visual contrast that commands attention in any room.',
+                'This is not just a functional device; it is a statement piece. The careful balance of traditional aesthetics and modern industrial design results in a centerpiece that complements both classic and contemporary interiors with effortless grace.'
+            ],
+            background: '#0c0a08', // Deep bronze/brown
         },
         {
             id: 'experience',
             title: 'ELEVATE YOUR SPACE',
-            description: 'Long-lasting fragrance. Adjustable temperature control. The perfect blend of tradition and innovation for the modern connoisseur.',
-            background: '#000000', // Pure black
+            paragraphs: [
+                'Transform your environment instantly with long-lasting, enveloping fragrance. The advanced temperature control system allows you to customize the intensity of the scent, ensuring the perfect ambiance for quiet evenings, social gatherings, or moments of meditation.',
+                'Designed for the modern connoisseur, OUD Luxe™ operates in near silence with intuitive controls. It is the ultimate fusion of ancestral wisdom and innovative engineering, offering a sensory upgrade that elevates your daily rituals.'
+            ],
+            background: '#080c0a', // Deep forest/emerald black
         },
     ],
 

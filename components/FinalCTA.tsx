@@ -100,7 +100,7 @@ export default function FinalCTA() {
     }, [scrollYProgress]);
 
     return (
-        <section ref={containerRef} className="relative h-[120vh] bg-black">
+        <section ref={containerRef} className="relative z-50 h-[120vh] bg-black">
             <div className="sticky top-0 h-screen w-full overflow-hidden flex flex-col items-center justify-end pb-0">
                 {/* Canvas Background */}
                 <canvas
@@ -116,7 +116,7 @@ export default function FinalCTA() {
                     style={{ opacity: textOpacity, y: textY }}
                     className="relative z-20 text-center px-4"
                 >
-                    <h2 className="text-5xl md:text-8xl font-display font-black uppercase text-luxeGold mb-8 drop-shadow-lg">
+                    <h2 className="text-5xl md:text-8xl font-calligraphy font-bold uppercase text-luxeGold mb-8 drop-shadow-lg">
                         {productData.finalTagline}
                     </h2>
 

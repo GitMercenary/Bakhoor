@@ -16,6 +16,8 @@ const config: Config = {
             },
             fontFamily: {
                 arabic: ['Amiri', 'serif'],
+                calligraphy: ['"Cinzel Decorative"', 'serif'],
+                'arabic-display': ['"El Messiri"', 'sans-serif'],
                 display: ['Bebas Neue', 'sans-serif'],
                 body: ['Inter', 'sans-serif'],
             },

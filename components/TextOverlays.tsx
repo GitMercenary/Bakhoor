@@ -29,12 +29,12 @@ export default function TextOverlays() {
                     >
                         <div className="max-w-4xl">
                             {/* Desktop heading */}
-                            <h2 className="hidden md:block text-7xl lg:text-9xl font-display font-black uppercase text-white drop-shadow-2xl tracking-wider">
+                            <h2 className="hidden md:block text-7xl lg:text-9xl font-calligraphy font-bold uppercase text-white drop-shadow-2xl tracking-wider">
                                 {section.title}
                             </h2>
 
                             {/* Mobile heading - smaller to not overwhelm product */}
-                            <h2 className="md:hidden text-5xl font-display font-black uppercase text-white drop-shadow-2xl tracking-wider">
+                            <h2 className="md:hidden text-5xl font-calligraphy font-bold uppercase text-white drop-shadow-2xl tracking-wider">
                                 {section.title}
                             </h2>
 

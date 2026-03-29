@@ -11,7 +11,7 @@ export default function Home() {
             <Navbar />
 
             {/* PHASE 1: Canvas Animation (249 frames) - 1400vh tall */}
-            <div className="relative">
+            <div className="relative z-40 bg-black">
                 <HeroCanvas />
                 <TextOverlays />
             </div>
