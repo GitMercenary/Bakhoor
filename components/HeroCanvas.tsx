@@ -44,24 +44,6 @@ export default function HeroCanvas() {
         const ctx = canvas.getContext('2d');
         if (!ctx) return;
 
-        // --- FIXED: Extract DOM Layout mutations OUT of the scroll loop! ---
-        const resizeCanvas = () => {
-            const dpr = window.devicePixelRatio || 1;
-            const width = window.innerWidth;
-            const height = window.innerHeight;
-
-            canvas.width = width * dpr;
-            canvas.height = height * dpr;
-            canvas.style.width = `${width}px`;
-            canvas.style.height = `${height}px`;
-
-            ctx.scale(dpr, dpr);
-            render(); // Force a re-render after resize clears context
-        };
-
-        window.addEventListener('resize', resizeCanvas);
-        resizeCanvas(); // Set initial size
-
         // High-performance scroll render function
         const render = () => {
             const progress = scrollYProgress.get();
@@ -98,6 +80,24 @@ export default function HeroCanvas() {
 
             ctx.drawImage(img, offsetX, offsetY, drawWidth, drawHeight);
         };
+
+        // --- FIXED: Extract DOM Layout mutations OUT of the scroll loop! ---
+        const resizeCanvas = () => {
+            const dpr = window.devicePixelRatio || 1;
+            const width = window.innerWidth;
+            const height = window.innerHeight;
+
+            canvas.width = width * dpr;
+            canvas.height = height * dpr;
+            canvas.style.width = `${width}px`;
+            canvas.style.height = `${height}px`;
+
+            ctx.scale(dpr, dpr);
+            render(); // Force a re-render after resize clears context
+        };
+
+        window.addEventListener('resize', resizeCanvas);
+        resizeCanvas(); // Set initial size
 
         const unsubscribe = scrollYProgress.on('change', render);
 
